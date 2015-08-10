@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5DAA5D731B783B60009593E3 /* HSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAA5D711B783B60009593E3 /* HSL.swift */; };
+		5DAA5D741B783B60009593E3 /* NSColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAA5D721B783B60009593E3 /* NSColor.swift */; };
 		60CD2950418F4E0A763EE660 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A6FF0406DC6782AA30D386A /* libPods.a */; };
 		D719E9291A26D49E00E6CF1F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D719E9281A26D49E00E6CF1F /* AppDelegate.swift */; };
 		D719E92B1A26D49E00E6CF1F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D719E92A1A26D49E00E6CF1F /* ViewController.swift */; };
@@ -32,6 +34,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5DAA5D711B783B60009593E3 /* HSL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSL.swift; sourceTree = "<group>"; };
+		5DAA5D721B783B60009593E3 /* NSColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSColor.swift; sourceTree = "<group>"; };
 		674A03194F1D90B4AE43C007 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		6A6FF0406DC6782AA30D386A /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF562468E7BFD1CF21101942 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -104,6 +108,8 @@
 		D719E9251A26D49E00E6CF1F /* Palettes */ = {
 			isa = PBXGroup;
 			children = (
+				5DAA5D711B783B60009593E3 /* HSL.swift */,
+				5DAA5D721B783B60009593E3 /* NSColor.swift */,
 				D719E9281A26D49E00E6CF1F /* AppDelegate.swift */,
 				D719E92A1A26D49E00E6CF1F /* ViewController.swift */,
 				D7AFD9391A27092A00FC9000 /* PaletteTableCellView.swift */,
@@ -199,6 +205,7 @@
 		D719E91B1A26D49E00E6CF1F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = "Amit Burstein";
 				TargetAttributes = {
@@ -291,6 +298,8 @@
 				D7AFD93A1A27092A00FC9000 /* PaletteTableCellView.swift in Sources */,
 				D7C8F30C1A75FE3F009F2EB9 /* StringExtension.swift in Sources */,
 				D719E92B1A26D49E00E6CF1F /* ViewController.swift in Sources */,
+				5DAA5D731B783B60009593E3 /* HSL.swift in Sources */,
+				5DAA5D741B783B60009593E3 /* NSColor.swift in Sources */,
 				D765EC1B1A2AF16000469783 /* MainTableView.swift in Sources */,
 				D7AFD93C1A270C8D00FC9000 /* NSColorExtension.swift in Sources */,
 				D7E3EE1E1A2FCEF900DC1AC9 /* ColorConverter.swift in Sources */,

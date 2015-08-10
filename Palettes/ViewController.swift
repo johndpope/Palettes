@@ -13,7 +13,7 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
     // MARK: Properties
     
     let DefaultNumResults = 20
-    let RowHeight = 110
+    let RowHeight = 210
     let PaletteViewCornerRadius = 5
     let CopiedViewAnimationSpringBounciness = 20
     let CopiedViewAnimationSpringSpeed = 15
@@ -64,6 +64,7 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
         var url: String
         var colors: [String]
         var title: String
+        var otherColors: NSMutableDictionary
     }
     
     // MARK: Initialization
@@ -164,14 +165,35 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
         
         // Calculate width and height of each color view
         let colorViewWidth = ceil(paletteView.bounds.width / CGFloat(cell.colors.count))
-        let colorViewHeight = paletteView.bounds.height
+        let colorViewHeight = paletteView.bounds.height/2
+        
+        
+        
         
         // Create and append color views to palette view
+        
         for i in 0..<cell.colors.count {
-            let colorView = NSView(frame: CGRectMake(CGFloat(i) * colorViewWidth, 0, colorViewWidth, colorViewHeight))
+            let xOffset = CGFloat(i) * colorViewWidth
+            let colorView = NSView(frame: CGRectMake(xOffset, 0, colorViewWidth, colorViewHeight))
             colorView.wantsLayer = true
-            colorView.layer?.backgroundColor = NSColor(rgba: "#\(cell.colors[i])").CGColor
+            let hexName = cell.colors[i]
+            colorView.layer?.backgroundColor = NSColor(rgba: "#\(hexName)").CGColor
             paletteView.addSubview(colorView)
+            
+            
+            let colors = palette.otherColors .objectForKey(hexName) as! NSMutableDictionary
+
+                var j = 0
+                for (color,title) in colors{
+                    let yOffset = colorViewHeight+CGFloat(j*4) as CGFloat
+                    let colorView = NSView(frame: CGRectMake(xOffset, yOffset, colorViewWidth, 4))
+                    colorView.wantsLayer = true
+                    colorView.layer?.backgroundColor = color.CGColor
+                    paletteView.addSubview(colorView)
+                    j++
+                }
+                
+ 
         }
 
         return cell
@@ -312,7 +334,17 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
                     let url = paletteInfo.objectForKey("url") as? String
                     let colors = paletteInfo.objectForKey("colors") as? [String]
                     let title = paletteInfo.objectForKey("title") as? String
-                    self.palettes.append(Palette(url: url!, colors: colors!, title: title!))
+                    
+                    let totalColors = NSMutableDictionary()
+                    for color in colors!{
+                       
+                        let mainColor = NSColor(hexString: color)
+                        let otherColors = self.createOtherColors(mainColor)
+                        totalColors .setObject(otherColors, forKey: color)
+                    }
+                  
+                    
+                    self.palettes.append(Palette(url: url!, colors: colors!, title: title!, otherColors:totalColors))
                 }
                 
                 // Reload table in main queue and scroll to top if this is a new query
@@ -331,6 +363,47 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
         }) { _, _ in
             self.showErrorMessage(self.TableTextError)
         }
+    }
+    
+    func createOtherColors(mainColor:NSColor)->NSMutableDictionary{
+
+        var colorNames: [(String)] = []
+        var colors: [(NSColor)] = []
+        
+        
+        colorNames.append("Original")
+        colorNames.append("Lighter")
+        colorNames.append("Darker")
+        colorNames.append("Saturated")
+        colorNames.append("Desaturated")
+        colorNames.append("Grayscaled")
+        colorNames.append("Adjusted")
+        colorNames.append("Complement")
+        colorNames.append("Invert")
+        colorNames.append("MixBlue")
+        colorNames.append("MixGreen")
+        colorNames.append("MixYellow")
+     
+        colors.append(mainColor)
+        colors.append(mainColor.lighterColor())
+        colors.append(mainColor.darkerColor())
+        colors.append(mainColor.saturatedColor())
+        colors.append(mainColor.desaturatedColor())
+        colors.append(mainColor.grayscaledColor())
+        colors.append(mainColor.adjustedHueColor(45 / 360))
+        colors.append(mainColor.complementColor())
+        colors.append(mainColor.invertColor())
+        colors.append(mainColor.mixWithColor(NSColor.blueColor()))
+        colors.append(mainColor.mixWithColor(NSColor.greenColor()))
+        colors.append(mainColor.mixWithColor(NSColor.yellowColor()))
+
+        
+        let d0 =  NSMutableDictionary(objects: colorNames, forKeys: colors)
+        return d0
+        
+        
+
+        
     }
     
     func showErrorMessage(errorMessage: String) {
